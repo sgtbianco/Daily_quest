@@ -2,14 +2,14 @@
 
 
 poke_list = ["Absol", "Empoleon", "Sigilyph", "Magmortar", "Tangrowth", "Noivern"]
-nature_list = [Nature.Jolly, Nature.Modest, Nature.Timid, Nature.Modest, Nature.Sassy, Nature.Timid]
+nature_list = [Nature.Jolly, Nature.Modest, Nature.Timid, Nature.Rash, Nature.Sassy, Nature.Timid]
 ability_list = ["Justified", "Torrent", "Magic Guard", "Vital Spirit", "Regenerator", "Infiltrator"]
-move_list = [("Lovely Kiss", "Ice Beam", "Psychic", "Nasty Plot"),
-             ("Fiery Dance", "Quiver Dance", "Giga Drain", "Bug Buzz"),
-             ("Swords Dance", "Earthquake", "Iron Head", "Rock Tomb"),
-             ("Icicle Crash", "Ice Shard", "Low Kick", "Poison Jab"),
-             ("Moonblast", "Ice Beam", "Flamethrower", "Focus Blast"),
-             ("Swords Dance", "Bullet Punch", "Bug Bite", "Roost")]
+move_list = [("Swords Dance", "Sucker Punch", "Superpower", "Play Rough"),
+             ("Hydro Pump", "Ice Beam", "Flash Cannon", "Grass Knot"),
+             ("Psychic", "Heat Wave", "Energy Ball", "Air Slash"),
+             ("Fire Blast", "Focus Blast", "Thunderbolt", "Earthquake"),
+             ("Sleep Powder", "Giga Drain", "Leech Seed", "Knock Off"),
+             ("Draco Meteor", "Air Slash", "Flamethrower", "Roost")]
 
 for poke, nature, ability, skills in zip(poke_list, nature_list, ability_list, move_list):
     p = Pokemon(poke, 100)
