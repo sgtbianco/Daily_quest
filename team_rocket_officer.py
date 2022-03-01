@@ -17,7 +17,7 @@ def give_task():
         user.say(f"Team Rocket Officer: The Pokemon I need you to catch is a {user.vars.tro_pokemon}. Once you've caught it, please bring it to me.")
         user.say("Team Rocket Officer: As usual, you have 24 hours to complete this task. Do not disappoint me.")
     else:
-        user.say("Team Rocket Officer: Today's task is a bit different. We're going to have you recruit a new member. I was told by our spies that there's a potential candidate in {map name}")
+        user.say("Team Rocket Officer: Today's task is a bit different. We're going to have you recruit a new member. I was told by our spies that there's a potential candidate in {map name}.")
         user.say("Team Rocket Officer: You might need to be extra convincing, though... if you know what I mean.")
 
 
@@ -45,15 +45,20 @@ def give_reward():
         user.say("Team Rocket Officer: Congrats kid! You're officially a part of Team Rocket. Your new rank is 'Team Rocket Grunt.'")
         user.say("Team Rocket Officer: To celebate, I'll even give you a bonus.")
         user.items["Master Ball"] += 1
-        user.say("You received a Master Ball")
+        user.say("You received a Master Ball.")
         user.say("Team Rocket Officer: From now on, you'll receive greater rewards for completing assigned daily tasks.")
         user.say("Team Rocket Officer: Now get out of here! I have important matters to take care of.")
         user.vars.tro_rank = 2
+    elif user.tro_consec_days % 28 == 0:
+        user.say("Team Rocket Officer: Wow! you completed a whole months worth of tasks without fail.")
+        user.say("Team Rocket Officer: Here is a special reward for all of your hard work.")
+        user.items["Reroll Ticket"] += 1
+        user.say("You received a Reroll Ticket.")
     elif user.tro_consec_days % 7 == 0:
         user.say("Team Rocket Officer: It seems that you completed all 7 taks that you've been assigned.")
         user.say("Team Rocket Officer: As a bonus reward, take this.")
         user.items["Master Ball"] += 1
-        user.say("You received a Master Ball")
+        user.say("You received a Master Ball.")
 
 
 
@@ -82,7 +87,7 @@ if not user.vars.tro_innit:
         user.say("Team Rocket Officer: Perfect! We have a lot to discuss. I must say that my expectations are already high.")
         user.say("Team Rocket Officer: The Team Rocket scout I spoke with favorably recommended you after seeing your prowess in battle.")
         user.say("Team Rocket Officer: You're now officially on trial to become a Team Rocket grunt. We'll have you run some errands to prove your worth to us.")
-        user.say("Team Rocket Officer: I suspect this won't be troublesome for a skilled individual such as yourself, but this is part of the protocol to join our prestigious organization")
+        user.say("Team Rocket Officer: I suspect this won't be troublesome for a skilled individual such as yourself, but this is part of the protocol to join our prestigious organization.")
         user.say("Team Rocket Officer: If you successfully complete your assigned tasks for a whole week, you'll become one of us.")
         user.say("Team Rocket Officer: Of course, no labor is free, so I'll make sure to reward you every time.")
         user.say("Team Rocket Officer: Eventually, you can even receive better rewards as you acquire more experience.")
