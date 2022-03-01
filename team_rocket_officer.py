@@ -2,7 +2,6 @@
 
 import random
 
-# this daily doesnt consider days that pass between 2 completed quests i think
 
 
 def give_task():
@@ -28,34 +27,34 @@ def give_reward():
     if user.vars.which_task == 1:
         item_reward = 3 * user.vars.tro_rank
         user.items["PP Up"] += item_reward
-        user.say(f"You reveived {item_reward}x PP Up!")
+        user.say(f"You received {item_reward}x PP Up!")
 
     elif user.vars.which_task == 2:
         item_reward = 3 * user.vars.tro_rank
         user.items["Max Repel"] += item_reward
-        user.say(f"You reveived {item_reward}x Max Repel!")
+        user.say(f"You received {item_reward}x Max Repel!")
 
     else:
         item_reward = 3 * user.vars.tro_rank
         user.items["Rare Candy"] += item_reward
-        user.say(f"You reveived {item_reward}x Rare Candy!")
+        user.say(f"You received {item_reward}x Rare Candy!")
 
     if user.tro_consec_days % 7 == 0 and user.vars.tro_rank == 1:
-        user.say("Team Rocket Officer: It seems that you completed all 7 tasks that you've been assigned.")
-        user.say("Team Rocket Officer: Congrats kid! You're officially a part of Team Rocket. Your new rank is 'Team Rocket Grunt.'")
-        user.say("Team Rocket Officer: To celebate, I'll even give you a bonus.")
+        user.say("Team Rocket Officer: It seems that you completed all 7 tasks that were assigned to you.")
+        user.say("Team Rocket Officer: Congrats, kid! You're now officially part of Team Rocket. Your new rank is 'Team Rocket Grunt'.")
+        user.say("Team Rocket Officer: To celebrate, I'll even give you a bonus.")
         user.items["Master Ball"] += 1
         user.say("You received a Master Ball.")
         user.say("Team Rocket Officer: From now on, you'll receive greater rewards for completing assigned daily tasks.")
-        user.say("Team Rocket Officer: Now get out of here! I have important matters to take care of.")
+        user.say("Team Rocket Officer: Now go away! I have more important matters to attend to.")
         user.vars.tro_rank = 2
     elif user.tro_consec_days % 28 == 0:
-        user.say("Team Rocket Officer: Wow! you completed a whole months worth of tasks without fail.")
+        user.say("Team Rocket Officer: Wow! You completed a whole month of tasks without failing.")
         user.say("Team Rocket Officer: Here is a special reward for all of your hard work.")
         user.items["Reroll Ticket"] += 1
         user.say("You received a Reroll Ticket.")
     elif user.tro_consec_days % 7 == 0:
-        user.say("Team Rocket Officer: It seems that you completed all 7 taks that you've been assigned.")
+        user.say("Team Rocket Officer: It seems that you completed all 7 tasks that were assigned to you.")
         user.say("Team Rocket Officer: As a bonus reward, take this.")
         user.items["Master Ball"] += 1
         user.say("You received a Master Ball.")
@@ -109,7 +108,7 @@ if user.vars.tro_progress == 1:
 
 elif user.vars.tro_progress == 2 and user.vars.daily_active and not user.vars.daily_completed:
     if user.vars.which_task == 2:
-        p = user.select_pokemon("Team Rocket Officer: Show me the Pokemon the Pokemon that you were supposed to catch.")
+        p = user.select_pokemon("Team Rocket Officer: Show me the Pokemon that you were supposed to catch.")
         # this does not check if freshly caught
         if p.name == user.vars.tro_pokemon:
             user.say("Team Rocket Officer: Very good! This Pokemon will do. Here's a reward for your efforts.")
