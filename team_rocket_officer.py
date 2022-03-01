@@ -2,6 +2,8 @@
 
 import random
 
+# this daily doesnt consider days that pass between 2 completed quests i think
+
 #set quest vars and maybe which_task
 def give_task():
     user.vars.set("daily_active", True, timedelta(days=1))
@@ -67,6 +69,7 @@ elif user.vars.tro_progress == 2 and user.vars.daily_active and not user.vars.da
         if p.name == user.vars.tro_pokemon:
             user.vars.tro_consec_days += 1
             user.vars.tro_progress = 1
+            next_task()
             give_reward()
         else:
             user.say("That is not the Pokemon I asked for.")
@@ -80,8 +83,9 @@ elif user.vars.tro_progress == 2 and not user.vars.daily_active and not user.var
     user.vars.tro_consec_days = 0
     next_task()
 
-elif user.vars.tro_progress == 2 and not user.vars.daily_active and user.vars.daily_completed:
+elif user.vars.tro_progress == 2 and user.vars.daily_active and user.vars.daily_completed:
     user.say("I've been expecting you. Were you able to fulfill the task that was given to you?")
+    user.vars.tro_progress = 1
 
 
 
