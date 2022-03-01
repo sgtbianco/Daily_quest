@@ -21,7 +21,9 @@ def give_task():
 def give_reward():
     pass
 
-
+#1 to 2, 2 to 3, 3 to 1
+def next_task():
+    pass
 
 
 
@@ -74,8 +76,9 @@ elif user.vars.tro_progress == 2 and user.vars.daily_active and not user.vars.da
 elif user.vars.tro_progress == 2 and not user.vars.daily_active and not user.vars.daily_completed:
     user.say("I'm disappointed. I expected better from you, but you did not deliver. However, you still show a lot of promise and I have a new task for you.")
     user.say("Do not disappoint me again.")
-    # change which_task?
-    give_task(user.vars.which_task)
+    user.vars.tro_progress = 1
+    user.vars.tro_consec_days = 0
+    next_task()
 
 elif user.vars.tro_progress == 2 and not user.vars.daily_active and user.vars.daily_completed:
     user.say("I've been expecting you. Were you able to fulfill the task that was given to you?")
