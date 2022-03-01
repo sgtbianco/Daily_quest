@@ -1,6 +1,24 @@
 #!python
 
 
+poke_list = ["Absol", "Empoleon", "Sigilyph", "Magmortar", "Tangrowth", "Noivern"]
+nature_list = [Nature.Jolly, Nature.Modest, Nature.Timid, Nature.Modest, Nature.Sassy, Nature.Timid]
+ability_list = ["Justified", "Torrent", "Magic Guard", "Vital Spirit", "Regenerator", "Infiltrator"]
+move_list = [("Lovely Kiss", "Ice Beam", "Psychic", "Nasty Plot"),
+             ("Fiery Dance", "Quiver Dance", "Giga Drain", "Bug Buzz"),
+             ("Swords Dance", "Earthquake", "Iron Head", "Rock Tomb"),
+             ("Icicle Crash", "Ice Shard", "Low Kick", "Poison Jab"),
+             ("Moonblast", "Ice Beam", "Flamethrower", "Focus Blast"),
+             ("Swords Dance", "Bullet Punch", "Bug Bite", "Roost")]
+
+for poke, nature, ability, skills in zip(poke_list, nature_list, ability_list, move_list):
+    p = Pokemon(poke, 100)
+    p.nature = nature
+    p.ability = ability
+    p.skills = skills
+    npc.team.append(p)
+
+
 def start_battle():
     user.pause()
     if user.battle(npc, no_exp=True, no_teleport=True) == 1:
