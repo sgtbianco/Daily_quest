@@ -1,17 +1,27 @@
 #!python
 
+import random
 
-def give_task(day):
+#set quest vars and maybe which_task
+def give_task():
     user.vars.set("daily_active", True, timedelta(days=1))
-    if day == 1:
+    if user.vars.which_task == 1:
         user.say("For today's task, I'd like you to fetch a rare mushroom that only grows in Johto's forests. Once you've found it, please bring it to me.")
         user.say("You'll be given 24 hours to complete this task. Do not disappoint me.")
-    elif day == 2:
+    elif user.vars.which_task == 2:
+        pokemon_list = ["Yamask", "Woobat", "Frillish", "Skorupi", "Inkay"]
+        user.vars.tro_pokemon = random.choice(pokemon_list)
         user.say("Today, I want you to catch a specific Pokemon for me. That way, Team Rocket can get one step closer to world domination... thanks to you!")
-        user.say(f"The Pokemon I need you to catch is a {Pokemon.name}. Once you've caught it, please bring it to me.")
+        user.say(f"The Pokemon I need you to catch is a {user.vars.tro_pokemon}. Once you've caught it, please bring it to me.")
         user.say("As usual, you have 24 hours to complete this task. Do not disappoint me.")
     else:
-        user.say("Today's task is a bit different. We're going to have you recruit a new member. I was told by our spies that there's a potential candidate in {map name}")    
+        user.say("Today's task is a bit different. We're going to have you recruit a new member. I was told by our spies that there's a potential candidate in {map name}")
+        user.say("You might need to be extra convincing, though... if you know what I mean.")
+
+def give_reward():
+    pass
+
+
 
 
 
@@ -38,13 +48,40 @@ if not user.vars.tro_innit:
 
 
 if user.vars.tro_progress == 1:
-    choice2 = ("Without further ado, shall we begin?", "Yes!", "No, I need more time to prepare.")
-    if choice2[0] == 0:
-        user.vars.tro_progress = 2
-        give_task(user.vars.which_task)
-        #user.vars.set("daily_active", True, timedelta(days=1))
+    if not user.vars.daily_active:
+        choice2 = ("Shall we begin today's task?", "Yes!", "No, I need more time to prepare.")
+        if choice2[0] == 0:
+            user.vars.tro_progress = 2
+            give_task()
+        else:
+            user.say("Very well. Come back when you're ready, but don't take too long or someone else might take your spot.")
     else:
-        user.say("Very well. Come back when you're ready, but don't take too long or someone else might take your spot.")
-    
+        user.say(f"Come back in {user.expire.daily_active}.")
+
 elif user.vars.tro_progress == 2 and user.vars.daily_active and not user.vars.daily_completed:
-    user.say("I see you're still twiddling your thumbs while time is ticking down. You must complete your assign task within {user.expire.daily_active}.")
+    if user.vars.which_task == 2:
+        p = user.select_pokemon("Show me the Pokemon the Pokemon that you were supposed to catch.")
+        # this does not check if freshly caught
+        if p.name == user.vars.tro_pokemon:
+            user.vars.tro_consec_days += 1
+            user.vars.tro_progress = 1
+            give_reward()
+        else:
+            user.say("That is not the Pokemon I asked for.")
+    else:
+        user.say("I see you're still twiddling your thumbs while time is ticking down. You must complete your assigned task within {user.expire.daily_active}.")
+
+elif user.vars.tro_progress == 2 and not user.vars.daily_active and not user.vars.daily_completed:
+    user.say("I'm disappointed. I expected better from you, but you did not deliver. However, you still show a lot of promise and I have a new task for you.")
+    user.say("Do not disappoint me again.")
+    # change which_task?
+    give_task(user.vars.which_task)
+
+elif user.vars.tro_progress == 2 and not user.vars.daily_active and user.vars.daily_completed:
+    user.say("I've been expecting you. Were you able to fulfill the task that was given to you?")
+
+
+
+    user.vars.tro_consec_days += 1
+    give_reward(user.vars.tro_consec_days)
+    # change which_task?
